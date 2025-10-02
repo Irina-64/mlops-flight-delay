@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python3 src/preprocess.py
+    deps:
+    - path: data/raw/flights_sample.csv
+      hash: md5
+      md5: 8d8ee9df5a3f7326f00dac93e8f11b8f
+      size: 6699
+    - path: src/preprocess.py
+      hash: md5
+      md5: 9c0afc6a19318f0cae4a97588d3450df
+      size: 1277
+    outs:
+    - path: data/processed/processed.csv
+      hash: md5
+      md5: 8e9c93c04b2eab98ca82fddb095807a9
+      size: 7629
