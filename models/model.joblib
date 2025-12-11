@@ -2,11 +2,12 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8">
-    <title>HTML Academy: Седона</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Защита проекта: Flight Delay Prediction System</title>
   </head>
   <body>
 
-    <p>Репозиторий создан для обучения на профессиональном онлайн‑курсе «<a href="https://htmlacademy.ru/intensive/htmlcss">HTML и CSS. Профессиональная вёрстка сайтов</a>».</p>
+    <p>Репозиторий создан для обучения на курсе «<a href="https://do.skif.donstu.ru/course/view.php?id=7508>Управление процессами машинного обучения (MLOps)</a>».</p>
 
   </body>
 </html>
