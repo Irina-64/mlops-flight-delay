@@ -1,0 +1,89 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py --config params.yaml
+    deps:
+    - path: data/raw/flights.csv
+      hash: md5
+      md5: 5f880da0c7a75ee259c089a60baeb8fb
+      size: 7045143
+    - path: params.yaml
+      hash: md5
+      md5: b576e74b8c09c286a4f49d10d0b15a6e
+      size: 340
+    - path: src/preprocess.py
+      hash: md5
+      md5: a645c3d2ef120bdfc57e532befeb5453
+      size: 4967
+    params:
+      params.yaml:
+        preprocess:
+          handle_missing: true
+          remove_outliers: false
+          test_size: 0.2
+          random_state: 42
+    outs:
+    - path: data/processed/flights_processed.csv
+      hash: md5
+      md5: f214c7f374b3de3e3fac1f843d5e034c
+      size: 14771699
+    - path: models/encoders.pkl
+      hash: md5
+      md5: 58f74f9c0551c8a954c1b50239c0e1da
+      size: 1369
+    - path: models/scaler.pkl
+      hash: md5
+      md5: 38b78dfe158caeee2884cc71ae69ca0e
+      size: 1255
+  validate:
+    cmd: python src/validate_data.py --data data/processed/flights_processed.csv
+    deps:
+    - path: data/processed/flights_processed.csv
+      hash: md5
+      md5: f214c7f374b3de3e3fac1f843d5e034c
+      size: 14771699
+    - path: src/validate_data.py
+      hash: md5
+      md5: 02f27f74457ea9fa05d2d5daee5f8203
+      size: 1896
+    outs:
+    - path: reports/data_validation.json
+      hash: md5
+      md5: 9ccda686b55e715f30a440e5c3c599fe
+      size: 6256
+  split:
+    cmd: python src/split_data.py --config params.yaml
+    deps:
+    - path: data/processed/flights_processed.csv
+      hash: md5
+      md5: f214c7f374b3de3e3fac1f843d5e034c
+      size: 14771699
+    - path: params.yaml
+      hash: md5
+      md5: b576e74b8c09c286a4f49d10d0b15a6e
+      size: 340
+    - path: src/split_data.py
+      hash: md5
+      md5: 8921e635cde1ddb7ac299f7cc3d93a20
+      size: 1593
+    params:
+      params.yaml:
+        preprocess.random_state: 42
+        preprocess.test_size: 0.2
+    outs:
+    - path: data/split/X_test.csv
+      hash: md5
+      md5: 3dce14844d703bc3f856cf04811aa4ce
+      size: 2520811
+    - path: data/split/X_train.csv
+      hash: md5
+      md5: 2ed0ba0534af0e1bd3ff491484179cf9
+      size: 10083904
+    - path: data/split/y_test.csv
+      hash: md5
+      md5: c692eb2c0ff199446d99891fa07ef586
+      size: 30012
+    - path: data/split/y_train.csv
+      hash: md5
+      md5: 2bccf8622a2d97bfe6c5dd74ac46fc2c
+      size: 120012

@@ -1,0 +1,36 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py --config params.yaml
+    deps:
+      - data/raw/flights.csv
+      - src/preprocess.py
+      - params.yaml
+    outs:
+      - data/processed/flights_processed.csv
+      - models/encoders.pkl
+      - models/scaler.pkl
+    params:
+      - preprocess
+      
+  validate:
+    cmd: python src/validate_data.py --data data/processed/flights_processed.csv
+    deps:
+      - data/processed/flights_processed.csv
+      - src/validate_data.py
+    outs:
+      - reports/data_validation.json
+      
+  split:
+    cmd: python src/split_data.py --config params.yaml
+    deps:
+      - data/processed/flights_processed.csv
+      - src/split_data.py
+      - params.yaml
+    outs:
+      - data/split/X_train.csv
+      - data/split/X_test.csv
+      - data/split/y_train.csv
+      - data/split/y_test.csv
+    params:
+      - preprocess.test_size
+      - preprocess.random_state

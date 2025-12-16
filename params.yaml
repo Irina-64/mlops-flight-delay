@@ -1,0 +1,19 @@
+data:
+  raw: "data/raw/flights.csv"
+  processed: "data/processed/flights_processed.csv"
+
+preprocess:
+  handle_missing: true
+  remove_outliers: false
+  test_size: 0.2
+  random_state: 42
+
+model:
+  algorithm: "random_forest"
+  n_estimators: 100
+  max_depth: 10
+  random_state: 42
+
+train:
+  learning_rate: 0.01
+  epochs: 100
